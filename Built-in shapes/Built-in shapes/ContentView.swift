@@ -14,16 +14,19 @@ struct ContentView: View {
                 .padding()
                 .background(.yellow)
                 .clipShape(.capsule)
+                .offset(x: 50)
             
             Text("Rounded Rectangle")
                 .padding()
                 .background(.blue)
                 .clipShape(.rect(cornerRadius: 16))
+                .offset(x: -50)
             
             Text("Uneven Rounded Rectangle")
                 .padding()
                 .background(.green)
                 .clipShape(.rect(topLeadingRadius: 20, bottomTrailingRadius: 20))
+                .offset(y: 50)
             
         }
         .padding(.top, 30)
@@ -33,10 +36,12 @@ struct ContentView: View {
             Rectangle()
                 .fill(.gray)
                 .frame(width: 200, height: 200)
+                .position(x: 0, y: 0)
             
             RoundedRectangle(cornerRadius: 25)
                 .fill(.blue)
                 .frame(width: 200, height: 200)
+                .offset(x: 100, y: -200)
             
             UnevenRoundedRectangle(cornerRadii: .init(topLeading: 50, topTrailing: 20))
                 .frame(width: 100, height: 150)
@@ -52,7 +57,7 @@ struct ContentView: View {
             Circle()
                 .fill(.black)
                 .frame(width: 30)
-            
+                .offset(y: 100)
         }
     }
 }
