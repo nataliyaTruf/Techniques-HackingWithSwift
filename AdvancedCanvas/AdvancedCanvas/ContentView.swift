@@ -7,24 +7,17 @@
 
 import SwiftUI
 
-class DrawingModel: ObservableObject {
-    var angle = 0.0
-}
-
 struct ContentView: View {
-    @StateObject private var model = DrawingModel()
     
     var body: some View {
-        TimelineView (.animation){ timeline in
-            Canvas { context, size in
-                model.angle += 0.1
-                
-                context.translateBy(x: 200, y: 200)
-                
-                let t = ProjectionTransform(CATransform3DMakeRotation(model.angle, 1, 1, 1))
-                context.addFilter(.projectionTransform(t))
-                context.draw(Text("Hello World!").font(.largeTitle), at: .zero)
-                _ = timeline.date
+        Canvas { context, size in
+            print("Rendering")
+            let path = Path(roundedRect: CGRect(x: 100, y: 200, width: 200, height: 200), cornerRadius: 25)
+            
+            if context.environment.colorScheme == .dark {
+                context.fill(path, with: .color(.white))
+            } else {
+                context.fill(path, with: .color(.black))
             }
         }
         
