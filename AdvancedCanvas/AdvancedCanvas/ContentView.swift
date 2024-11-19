@@ -11,16 +11,18 @@ struct ContentView: View {
     
     var body: some View {
         Canvas { context, size in
-            context.translateBy(x: 150, y: 200)
+            context.translateBy(x: 50, y: 5)
             
-            let resolved = context.resolve(Text("Hello world!").font(.title))
-            context.addFilter(.shadow(radius: 3))
-            context.addFilter(.shadow(radius: 3))
-            
-            for i in 1...100 {
-                context.translateBy(x: 1, y: 1)
-                context.opacity = Double(i) / 100
-                context.draw(resolved, at: .zero)
+            context.withCGContext { cgContext in
+                cgContext.setFillColor(UIColor.black.cgColor)
+                
+                for row in 0..<8 {
+                    for col in 0..<8 {
+                        if (row + col).isMultiple(of: 2) {
+                            cgContext.fill(CGRect(x: col * 32, y: row * 32, width: 32, height: 32))
+                        }
+                    }
+                }
             }
         }
     }
